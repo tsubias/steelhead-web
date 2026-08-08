@@ -1,0 +1,26 @@
+:root {
+  --bg: #0066a6;
+  --text: #ffffff;
+  --accent: #f76115;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}

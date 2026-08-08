@@ -1,160 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/steelhead-logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Steelhead AI</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='67' height='57' viewBox='0 0 67 57' fill='none'%3E%3Cpath d='M19.6051 4.91932L30.7435 12.4812C31.9811 13.3215 32.299 14.9837 31.4588 16.2213C30.6186 17.4589 28.9563 17.7768 27.7187 16.9366L16.5803 9.37467C13.1839 15.2652 14.918 22.8308 20.611 26.6958L21.0235 26.9759C22.2611 27.8161 22.579 29.4784 21.7388 30.716C20.8986 31.9536 19.2363 32.2715 17.9987 31.4312L17.5862 31.1512C11.8932 27.2862 4.22161 28.4662 0.000106602 33.7966L29.6199 53.9057C35.3129 57.7707 42.9845 56.5907 47.206 51.2603L36.0677 43.6984C34.8301 42.8582 34.5121 41.1959 35.3524 39.9583C36.1926 38.7207 37.8548 38.4028 39.0924 39.243L50.2308 46.8049C53.6272 40.9144 51.8931 33.3488 46.2002 29.4838L45.7876 29.2037C44.55 28.3635 44.2321 26.7013 45.0723 25.4637C45.9126 24.2261 47.5748 23.9082 48.8124 24.7484L49.2249 25.0284C54.9179 28.8934 62.5895 27.7134 66.811 22.383L37.1912 2.2739C31.4982 -1.59108 23.8266 -0.41105 19.6051 4.91932Z' fill='%23F76115'/%3E%3C/svg%3E">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-        :root {
-            --bg: #0066a6;
-            --text: #ffffff;
-            --accent: #f76115;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 640px;
-            width: 100%;
-        }
-
-        .logo-container {
-            margin-bottom: 3rem;
-            animation: logo-rotate 1s ease-in-out infinite paused;
-        }
-
-        .logo-container:hover {
-            animation-play-state: running;
-        }
-
-        svg {
-            width: 180px;
-            height: auto;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        }
-
-        .content {
-            margin-bottom: 4rem;
-        }
-
-        h1 {
-            font-size: 4.5rem;
-            line-height: 5.625rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-
-        .subtitle {
-            font-size: 1.75rem;
-            font-weight: 500;
-            letter-spacing: -0.01em;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 0.5rem;
-        }
-
-        .accent {
-            color: var(--accent);
-        }
-
-        footer {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.95rem;
-            opacity: 0.75;
-            font-weight: 400;
-        }
-
-        @keyframes logo-rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            h1 {
-                font-size: 3.25rem;
-                line-height: 4rem;
-            }
-            .subtitle {
-                font-size: 1.4rem;
-            }
-            svg {
-                width: 140px;
-            }
-            .container {
-                padding: 1.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Logo -->
-        <div class="logo-container">
-            <svg width="180" height="153" viewBox="0 0 67 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19.6051 4.91932L30.7435 12.4812C31.9811 13.3215 32.299 14.9837 31.4588 16.2213C30.6186 17.4589 28.9563 17.7768 27.7187 16.9366L16.5803 9.37467C13.1839 15.2652 14.918 22.8308 20.611 26.6958L21.0235 26.9759C22.2611 27.8161 22.579 29.4784 21.7388 30.716C20.8986 31.9536 19.2363 32.2715 17.9987 31.4312L17.5862 31.1512C11.8932 27.2862 4.22161 28.4662 0.000106602 33.7966L29.6199 53.9057C35.3129 57.7707 42.9845 56.5907 47.206 51.2603L36.0677 43.6984C34.8301 42.8582 34.5121 41.1959 35.3524 39.9583C36.1926 38.7207 37.8548 38.4028 39.0924 39.243L50.2308 46.8049C53.6272 40.9144 51.8931 33.3488 46.2002 29.4838L45.7876 29.2037C44.55 28.3635 44.2321 26.7013 45.0723 25.4637C45.9126 24.2261 47.5748 23.9082 48.8124 24.7484L49.2249 25.0284C54.9179 28.8934 62.5895 27.7134 66.811 22.383L37.1912 2.2739C31.4982 -1.59108 23.8266 -0.41105 19.6051 4.91932Z" fill="#F76115"/>
-            </svg>
-        </div>
-
-        <!-- Content -->
-        <div class="content">
-            <h1>Closed Beta</h1>
-            <p class="subtitle">Summer <span class="accent">2026</span></p>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        © <span id="current-year"></span> Steelhead AI. All rights reserved.
-    </footer>
-
-    <script>
-        // current year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // logo rotation, 5 second x 1 second
-        const logoContainer = document.querySelector('.logo-container');
-        
-        function triggerRotation() {
-            logoContainer.style.animationPlayState = 'running';
-            setTimeout(() => {
-                logoContainer.style.animationPlayState = 'paused';
-            }, 1000); // 1 second rotation
-        }
-
-        // Trigger rotation every 5 seconds
-        setInterval(triggerRotation, 5000);
-
-        // Initial rotation after 2 seconds on load
-        setTimeout(triggerRotation, 2000);
-    </script>
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

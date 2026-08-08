@@ -1,0 +1,69 @@
+.container {
+  text-align: center;
+  padding: 2rem;
+  max-width: 640px;
+  width: 100%;
+  min-height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo-container {
+  margin-bottom: 3rem;
+}
+
+.logo-container.rotating {
+  animation: logo-rotate 1s ease-in-out;
+}
+
+.logo-container:hover {
+  animation: logo-rotate 1s ease-in-out;
+}
+
+.logo-container img {
+  width: 180px;
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+.content {
+  margin-bottom: 4rem;
+}
+
+h1 {
+  font-size: 4.5rem;
+  line-height: 5.625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+footer {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+  opacity: 0.75;
+}
+
+@keyframes logo-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
