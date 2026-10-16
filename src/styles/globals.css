@@ -1,25 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  --color-steelhead-blue: #066AAD;
+  --color-steelhead-blue-dark: #004D7D;
+  --color-steelhead-blue-light: #EBF5FB;
+  --color-steelhead-orange: #F76115;
+  --color-steelhead-orange-light: #FFF3ED;
+  --color-graysand-50: #FAF7F2;
+  --color-graysand-100: #F3EEE1;
+  --color-graysand-200: #E6DBC2;
+  --color-graysand-300: #D6C39B;
+}
+
 :root {
-  --bg: #0066a6;
+  --bg: #066AAD;
   --text: #ffffff;
-  --accent: #f76115;
+  --accent: #F76115;
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg);
   color: var(--text);
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0;
 }
 
 #root {
   min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
+@keyframes conduitMarch {
+  0% {
+    stroke-dashoffset: 40;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes laserPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes spiritBubble {
+  0%, 100% {
+    transform: translateX(-6px);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes compassNeedle {
+  0%, 100% {
+    transform: rotate(-3.5deg);
+  }
+  50% {
+    transform: rotate(3.5deg);
+  }
+}
+
+.animate-conduit {
+  animation: conduitMarch 1.2s linear infinite;
+}
+
+.animate-laser {
+  animation: laserPulse 2.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-spirit-bubble {
+  animation: spiritBubble 4s ease-in-out infinite;
+}
+
+.animate-compass-needle {
+  transform-origin: center;
+  animation: compassNeedle 4.5s ease-in-out infinite;
+}
+
+/* Steelhead Runner & Electrical Conduit Animations */
+@keyframes electricFault {
+  0%, 100% { opacity: 0.85; stroke: #F76115; filter: drop-shadow(0 0 2px #F76115); }
+  15% { opacity: 0.2; stroke: #EF4444; filter: none; }
+  30% { opacity: 1; stroke: #F76115; filter: drop-shadow(0 0 6px #F76115); }
+  45% { opacity: 0.3; stroke: #F97316; filter: none; }
+  60% { opacity: 0.95; stroke: #EF4444; filter: drop-shadow(0 0 4px #EF4444); }
+  75% { opacity: 0.4; stroke: #F76115; filter: none; }
+  90% { opacity: 1; stroke: #F76115; filter: drop-shadow(0 0 5px #F76115); }
+}
+
+@keyframes sparkPop {
+  0%, 100% { transform: scale(0.6) rotate(0deg); opacity: 0; }
+  25% { transform: scale(1.3) rotate(45deg); opacity: 1; }
+  50% { transform: scale(0.8) rotate(90deg); opacity: 0.4; }
+  75% { transform: scale(1.4) rotate(135deg); opacity: 0.9; }
+}
+
+@keyframes currentFlowFast {
+  0% { stroke-dashoffset: 48; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes runnerWrench {
+  0%, 100% { transform: rotate(0deg); }
+  35% { transform: rotate(-18deg); }
+  70% { transform: rotate(4deg); }
+}
+
+@keyframes runnerIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+}
+
+.animate-electric-fault {
+  animation: electricFault 1.8s steps(8, end) infinite;
+}
+
+.animate-spark {
+  animation: sparkPop 0.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-current-flow {
+  animation: currentFlowFast 0.8s linear infinite;
+}
+
+.animate-runner-wrench {
+  animation: runnerWrench 1.5s ease-in-out infinite;
+  transform-origin: 30px 45px;
+}
+
+.animate-runner-idle {
+  animation: runnerIdle 2.5s ease-in-out infinite;
+}
+
+@keyframes conduitPulse {
+  0% { transform: translateY(-30%); opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { transform: translateY(30%); opacity: 0.6; }
+}
+
+.animate-conduit {
+  animation: conduitPulse 1.6s ease-in-out infinite alternate;
+}
+
+
+

@@ -18,11 +18,27 @@ export default function LegalLayout({ title, children }) {
 
         <article className="legal-document">{children}</article>
 
-        <nav className="legal-nav" aria-label="Legal navigation">
-          <Link to="/">Home</Link>
-          <Link to="/privacy">Privacy Policy</Link>
-          <Link to="/terms">Terms of Use</Link>
-        </nav>
+        <footer className="legal-footer">
+          <nav className="legal-nav" aria-label="Legal navigation">
+            <Link to="/">Home</Link>
+            <span className="legal-nav-separator">•</span>
+            <Link to="/privacy">Privacy Policy</Link>
+            <span className="legal-nav-separator">•</span>
+            <Link to="/terms">Terms of Use</Link>
+          </nav>
+
+          <div className="legal-footer-info">
+            <p>
+              Questions:{" "}
+              <a href="mailto:support@steelhead.ai" className="legal-support-link">
+                support@steelhead.ai
+              </a>
+            </p>
+            <p className="legal-copyright">
+              © {new Date().getFullYear()} Steelhead AI. All rights reserved.
+            </p>
+          </div>
+        </footer>
       </div>
     </main>
   );

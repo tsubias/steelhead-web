@@ -1,8 +1,17 @@
+::selection {
+  background: #f76115;
+  color: #ffffff;
+}
+
 .legal-page {
   min-height: 100vh;
+  width: 100%;
+  max-width: 948px;
+  margin: 0 auto;
   padding: 3rem 1.5rem 5rem;
   background: #faf7f2;
-  color: #222222;
+  color: #101828;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.12);
 }
 
 .legal-shell {
@@ -18,11 +27,16 @@
 
 .legal-logo-link {
   display: inline-block;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  transition: transform 0.2s ease;
+}
+
+.legal-logo-link:hover {
+  transform: scale(1.04);
 }
 
 .legal-logo {
-  width: 72px;
+  width: 56px;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -30,27 +44,39 @@
 
 .legal-header h1 {
   margin: 0;
-  color: #0066a6;
-  font-size: 2.5rem;
+  color: #066aad;
+  font-size: 2.35rem;
   line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  letter-spacing: -0.025em;
 }
 
 .legal-document {
   background: #ffffff;
-  border: 1px solid #ededed;
-  border-radius: 12px;
+  border: 1.5px solid #e6dbc2;
+  border-radius: 16px;
   padding: 3rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 24px rgba(16, 24, 40, 0.05);
+}
+
+.legal-document > p:first-of-type {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8125rem;
+  color: #717680;
+  letter-spacing: 0.02em;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid #e6dbc2;
+  line-height: 1.6;
 }
 
 .legal-document h2 {
   margin: 2.5rem 0 1rem;
-  color: #0066a6;
-  font-size: 1.5rem;
+  color: #066aad;
+  font-size: 1.45rem;
   line-height: 1.3;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.015em;
 }
 
 .legal-document h2:first-child {
@@ -59,13 +85,20 @@
 
 .legal-document p {
   margin: 0 0 1rem;
+  color: #2d3748;
   line-height: 1.7;
+}
+
+.legal-document strong {
+  color: #101828;
+  font-weight: 700;
 }
 
 .legal-document ul,
 .legal-document ol {
   margin: 1rem 0;
   padding-left: 2rem;
+  color: #2d3748;
 }
 
 .legal-document ul {
@@ -82,36 +115,82 @@
 }
 
 .legal-document a {
-  color: #0066a6;
+  color: #066aad;
   text-decoration: underline;
   text-underline-offset: 2px;
+  font-weight: 600;
+  transition: color 0.15s ease;
 }
 
 .legal-document a:hover {
+  color: #004d7d;
   text-decoration-thickness: 2px;
+}
+
+.legal-footer {
+  margin-top: 2.5rem;
 }
 
 .legal-nav {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: 1rem;
   font-size: 0.95rem;
 }
 
 .legal-nav a {
-  color: #0066a6;
+  color: #066aad;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  transition: color 0.15s ease;
 }
 
 .legal-nav a:hover {
+  color: #004d7d;
   text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-nav-separator {
+  color: #d6c39b;
+  font-size: 0.75rem;
+  user-select: none;
+}
+
+.legal-footer-info {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: #535862;
+}
+
+.legal-support-link {
+  color: #066aad;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.legal-support-link:hover {
+  color: #004d7d;
+}
+
+.legal-copyright {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #717680;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 @media (max-width: 640px) {
   .legal-page {
-    padding: 2rem 1rem 3rem;
+    padding: 2rem 1rem 3.5rem;
   }
 
   .legal-header {
@@ -119,25 +198,25 @@
   }
 
   .legal-logo {
-    width: 60px;
+    width: 48px;
   }
 
   .legal-header h1 {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
 
   .legal-document {
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
   }
 
   .legal-document h2 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     margin-top: 2rem;
   }
 
   .legal-nav {
     flex-wrap: wrap;
-    gap: 0.75rem 1.25rem;
+    gap: 0.5rem 0.75rem;
   }
 }

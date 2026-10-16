@@ -11,7 +11,7 @@ export default function Home() {
         <div className="content">
           <h1>Closed Beta</h1>
           <p className="subtitle">
-            Summer <span className="accent">2026</span>
+            Fall <span className="accent">2026</span>
           </p>
         </div>
       </main>

@@ -1,0 +1,972 @@
+/* ==========================================================================
+   THE POWER RISER & RUNNER SYSTEM (PHASE 1)
+   Structural EMT Riser, Autonomous Maintenance Runner, and Floor Raceway
+   ========================================================================== */
+
+:root {
+  --riser-x: 20px;
+  --riser-w: 18px;
+  --drop-h: 96px;
+  --body-ml: 46px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --riser-x: 38px;
+    --riser-w: 24px;
+    --drop-h: 96px;
+    --body-ml: 76px;
+  }
+}
+
+/* ==========================================================================
+   RISER ROOT CONTAINER
+   ========================================================================== */
+.riser-root {
+  position: relative;
+  width: 100%;
+}
+
+/* ==========================================================================
+   SERVICE DROP (ROOF UTILITY SERVICE)
+   Utility Drop Line, Weatherhead Gooseneck, Electric Meter & Mast Nipple
+   ========================================================================== */
+.riser-drop {
+  position: absolute;
+  top: 0;
+  left: var(--riser-x);
+  transform: translateX(-50%);
+  width: 40px;
+  height: var(--drop-h);
+  z-index: 16;
+  pointer-events: none;
+}
+
+.riser-drop svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.riser-drop .meter-lamp {
+  fill: #64748B;
+  transition: fill 0.3s ease, filter 0.3s ease;
+}
+
+.riser-drop.drop-live .meter-lamp {
+  fill: #10B981;
+  filter: drop-shadow(0 0 5px #10B981);
+}
+
+.riser-drop .meter-hand {
+  transform-origin: 20px 51px;
+  transition: transform 0.4s ease;
+}
+
+.riser-drop.drop-live .meter-hand {
+  animation: meterSpin 2.4s linear infinite;
+}
+
+@keyframes meterSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   STRUCTURAL STEEL RISER CONDUIT PIPE (THE SPINE)
+   ========================================================================== */
+.riser-pipe {
+  position: absolute;
+  top: var(--drop-h);
+  left: var(--riser-x);
+  transform: translateX(-50%);
+  width: var(--riser-w);
+  z-index: 15;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #94A3B8 0%,
+    #E2E8F0 35%,
+    #CBD5E1 70%,
+    #64748B 100%
+  );
+  border-left: 2px solid #334155;
+  border-right: 2px solid #334155;
+  border-radius: 4px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.12),
+    inset 1px 0 2px rgba(255, 255, 255, 0.7),
+    inset -1px 0 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Sight-window core inside the conduit */
+.riser-core {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  right: 4px;
+  background: #334155;
+  border-radius: 2px;
+  opacity: 0.55;
+}
+
+@media (min-width: 1024px) {
+  .riser-core {
+    left: 6px;
+    right: 6px;
+  }
+}
+
+/* Energized current stream traveling down the sight-window */
+.riser-lit {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  right: 4px;
+  width: calc(100% - 8px);
+  height: 0;
+  background: linear-gradient(
+    180deg,
+    #38BDF8 0%,
+    #066AAD 80%,
+    #F76115 100%
+  );
+  box-shadow:
+    0 0 10px rgba(56, 189, 248, 0.9),
+    0 0 20px rgba(6, 106, 173, 0.55);
+  border-radius: 2px;
+  z-index: 2;
+  transition: height 0.05s linear;
+}
+
+@media (min-width: 1024px) {
+  .riser-lit {
+    left: 6px;
+    right: 6px;
+    width: calc(100% - 12px);
+  }
+}
+
+/* ==========================================================================
+   FLOORS & RACEWAYS
+   ========================================================================== */
+.floor {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+/* Desktop stagger offsets (mobile stays uniform left gutter) */
+@media (min-width: 1024px) {
+  .floor.floor-o0 { --body-ml: 76px; }
+  .floor.floor-o1 { --body-ml: 104px; }
+  .floor.floor-o2 { --body-ml: 132px; }
+  .floor.floor-o3 { --body-ml: 160px; }
+  .floor.floor-o4 { --body-ml: 188px; }
+}
+
+.floor-body {
+  margin-left: var(--body-ml);
+  max-width: calc(100% - var(--body-ml));
+  transition: margin-left 0.25s ease;
+}
+
+/* Branch conduit pipe running horizontally from the riser into the section */
+.floor-branch {
+  position: absolute;
+  left: var(--riser-x);
+  top: var(--jy, 40px);
+  transform: translateY(-50%);
+  width: calc(var(--body-ml) - var(--riser-x) + 4px);
+  height: 12px;
+  background: linear-gradient(180deg, #E2E8F0 0%, #CBD5E1 50%, #94A3B8 100%);
+  border-top: 1.5px solid #475569;
+  border-bottom: 1.5px solid #475569;
+  z-index: 14;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .floor-branch {
+    height: 14px;
+  }
+}
+
+.floor-branch-core {
+  position: absolute;
+  inset: 2px 0;
+  background: #334155;
+  opacity: 0.5;
+  transition: background 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.floor[data-power="lit"] .floor-branch-core {
+  background: #38BDF8;
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.9);
+}
+
+.floor[data-power="fault"] .floor-branch-core {
+  background: #F76115;
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(247, 97, 21, 0.9);
+  animation: branchFaultJitter 0.12s infinite;
+}
+
+@keyframes branchFaultJitter {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.3; }
+}
+
+/* ==========================================================================
+   JUNCTION BOX (ON THE RISER)
+   ========================================================================== */
+.floor-jbox {
+  position: absolute;
+  left: var(--riser-x);
+  top: var(--jy, 40px);
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background: #1E293B;
+  border: 2px solid #475569;
+  border-radius: 6px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  z-index: 20;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (min-width: 1024px) {
+  .floor-jbox {
+    width: 38px;
+    height: 38px;
+    gap: 2.5px;
+  }
+}
+
+/* JBox Status Lamp */
+.jb-lamp {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #475569;
+  border: 1px solid #0F172A;
+  transition: all 0.25s ease;
+}
+
+@media (min-width: 1024px) {
+  .jb-lamp {
+    width: 7px;
+    height: 7px;
+  }
+}
+
+.floor[data-power="fault"] .jb-lamp {
+  background: #EF4444;
+  box-shadow: 0 0 8px #EF4444;
+  animation: jbLampFlicker 0.14s infinite;
+}
+
+.floor[data-power="lit"] .jb-lamp {
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+}
+
+@keyframes jbLampFlicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.85); }
+}
+
+/* JBox Monospace Floor Tag */
+.jb-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 8px;
+  font-weight: 800;
+  color: #94A3B8;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  transition: color 0.25s ease;
+}
+
+@media (min-width: 1024px) {
+  .jb-label {
+    font-size: 8.5px;
+  }
+}
+
+.floor[data-power="lit"] .jb-label {
+  color: #38BDF8;
+}
+
+/* JBox Breaker Lever */
+.jb-lever {
+  width: 10px;
+  height: 2px;
+  background: #64748B;
+  border-radius: 1px;
+  transition: all 0.25s ease;
+}
+
+@media (min-width: 1024px) {
+  .jb-lever {
+    width: 12px;
+    height: 2.5px;
+  }
+}
+
+.floor[data-power="lit"] .jb-lever {
+  background: #38BDF8;
+  transform: rotate(-25deg);
+}
+
+/* Fault Sparks Bursting from Junction Box */
+.jb-sparks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.floor[data-power="fault"] .jb-sparks {
+  opacity: 1;
+}
+
+.jb-sparks i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #FDE047;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #F76115;
+  top: 50%;
+  left: 50%;
+}
+
+.floor[data-power="fault"] .jb-sparks i:nth-child(1) {
+  animation: sparkShot1 0.4s infinite ease-out;
+}
+.floor[data-power="fault"] .jb-sparks i:nth-child(2) {
+  animation: sparkShot2 0.35s infinite 0.08s ease-out;
+}
+.floor[data-power="fault"] .jb-sparks i:nth-child(3) {
+  animation: sparkShot3 0.42s infinite 0.15s ease-out;
+}
+.floor[data-power="fault"] .jb-sparks i:nth-child(4) {
+  animation: sparkShot4 0.38s infinite 0.05s ease-out;
+}
+.floor[data-power="fault"] .jb-sparks i:nth-child(5) {
+  animation: sparkShot1 0.45s infinite 0.2s ease-out;
+}
+.floor[data-power="fault"] .jb-sparks i:nth-child(6) {
+  animation: sparkShot3 0.32s infinite 0.12s ease-out;
+}
+
+@keyframes sparkShot1 {
+  0% { transform: translate(-50%, -50%) translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) translate(-16px, -14px) scale(0); opacity: 0; }
+}
+@keyframes sparkShot2 {
+  0% { transform: translate(-50%, -50%) translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) translate(18px, -12px) scale(0); opacity: 0; }
+}
+@keyframes sparkShot3 {
+  0% { transform: translate(-50%, -50%) translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) translate(14px, 16px) scale(0); opacity: 0; }
+}
+@keyframes sparkShot4 {
+  0% { transform: translate(-50%, -50%) translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) translate(-15px, 15px) scale(0); opacity: 0; }
+}
+
+/* ==========================================================================
+   THE STEELHEAD RUNNER (AUTONOMOUS MAINTENANCE BOT)
+   ========================================================================== */
+.runner-root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  pointer-events: none;
+  visibility: hidden;
+  will-change: transform;
+}
+
+.runner-box {
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   THE STEELHEAD LOGO CARRIER (INDUSTRIAL TELEMETRY BADGE)
+   ========================================================================== */
+.carrier-wrapper {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.carrier-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.carrier-rotor {
+  transform-origin: 22px 22px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.carrier-mark {
+  transition: filter 0.25s ease, fill 0.25s ease;
+}
+
+.carrier-sparks {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Pose: IDLE */
+.carrier--idle .carrier-mark {
+  filter: drop-shadow(0 0 5px rgba(247, 97, 21, 0.6));
+}
+.carrier--idle .carrier-led-top {
+  fill: #38BDF8;
+}
+.carrier--idle .carrier-led-bot {
+  fill: #F59E0B;
+}
+
+/* Pose: CLIMB (Cruising along conduit) */
+.carrier--climb .carrier-wrapper {
+  transform: scale(1.06);
+}
+.carrier--climb .carrier-halo {
+  opacity: 0.85;
+  animation: carrierHaloSpin 1.2s linear infinite;
+  transform-origin: 22px 22px;
+}
+.carrier--climb .carrier-mark {
+  filter: drop-shadow(0 0 8px rgba(247, 97, 21, 0.95));
+}
+.carrier--climb .carrier-led-top {
+  animation: carrierLedBlink 0.3s ease-in-out infinite alternate;
+}
+
+/* Pose: BREAKER (Roof disconnect switch engagement) */
+.carrier--breaker .carrier-rotor {
+  animation: carrierRotorSnap90 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.carrier--breaker .carrier-mark {
+  filter: drop-shadow(0 0 12px #38BDF8);
+}
+.carrier--breaker .carrier-sparks {
+  animation: carrierSparkShot 0.45s ease-out forwards;
+}
+.carrier--breaker .carrier-halo {
+  opacity: 1;
+  stroke: #38BDF8;
+  transform-origin: 22px 22px;
+  animation: carrierHaloPulse 0.55s ease-out forwards;
+}
+
+/* Pose: CONNECT (Standard floor breaker switch) */
+.carrier--connect .carrier-rotor {
+  animation: carrierRotorSnap180 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.carrier--connect .carrier-mark {
+  filter: drop-shadow(0 0 12px #38BDF8);
+}
+.carrier--connect .carrier-sparks {
+  animation: carrierSparkShot 0.4s ease-out forwards;
+}
+.carrier--connect .carrier-halo {
+  opacity: 1;
+  stroke: #38BDF8;
+  transform-origin: 22px 22px;
+  animation: carrierHaloPulse 0.5s ease-out forwards;
+}
+
+/* Pose: REPAIR (Floor 07 / Section 01 Warning Hazard) */
+.carrier--repair .carrier-wrapper {
+  animation: carrierChatter 0.12s infinite;
+}
+.carrier--repair .carrier-rotor {
+  transform: rotate(-15deg);
+}
+.carrier--repair .carrier-mark {
+  filter: drop-shadow(0 0 10px #EF4444);
+}
+.carrier--repair .carrier-sparks {
+  opacity: 1;
+  animation: carrierSparkChatter 0.18s infinite;
+}
+
+/* Pose: DONE (Ground floor / Shop Finale) */
+.carrier--done .carrier-rotor {
+  transform: rotate(0deg);
+}
+.carrier--done .carrier-mark {
+  filter: drop-shadow(0 0 12px #10B981);
+}
+.carrier--done .carrier-led-top,
+.carrier--done .carrier-led-bot {
+  fill: #10B981;
+  filter: drop-shadow(0 0 5px #10B981);
+}
+
+@keyframes carrierHaloSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes carrierHaloPulse {
+  0% { transform: scale(0.9); opacity: 1; stroke-width: 2.5; }
+  100% { transform: scale(1.35); opacity: 0; stroke-width: 0.5; }
+}
+
+@keyframes carrierLedBlink {
+  0% { fill: #38BDF8; filter: drop-shadow(0 0 4px #38BDF8); }
+  100% { fill: #0284C7; filter: none; }
+}
+
+@keyframes carrierRotorSnap90 {
+  0% { transform: rotate(0deg); }
+  70% { transform: rotate(105deg); }
+  100% { transform: rotate(90deg); }
+}
+
+@keyframes carrierRotorSnap180 {
+  0% { transform: rotate(0deg); }
+  75% { transform: rotate(195deg); }
+  100% { transform: rotate(180deg); }
+}
+
+@keyframes carrierChatter {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-1.5px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, -0.5px); }
+}
+
+@keyframes carrierSparkChatter {
+  0%, 100% { opacity: 0.9; transform: scale(1.2); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+
+@keyframes carrierSparkShot {
+  0% { opacity: 1; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.3); }
+  100% { opacity: 0; transform: scale(1.8) translate(8px, -4px); }
+}
+
+.runner-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Limbs Pivot Setup (Rigid limbs, pivot ONLY at shoulders and hips) */
+.rb-arm-l {
+  transform-origin: 9px 26px;
+}
+.rb-arm-r {
+  transform-origin: 31px 26px;
+}
+.rb-leg-l {
+  transform-origin: 16px 41px;
+}
+.rb-leg-r {
+  transform-origin: 24px 41px;
+}
+.rb-head {
+  transform-origin: 20px 22px;
+}
+
+/* Default tool is tucked away */
+.rb-tool {
+  display: none;
+}
+.rb-spark {
+  display: none;
+}
+
+/* Pose: IDLE */
+.runner--idle .rb-eye {
+  fill: #38BDF8;
+  filter: drop-shadow(0 0 2px #38BDF8);
+}
+.runner--idle .rb-chest {
+  fill: #38BDF8;
+}
+
+/* Pose: CLIMB */
+.runner--climb .rb-leg-l {
+  animation: legClimb 0.32s ease-in-out infinite alternate;
+}
+.runner--climb .rb-leg-r {
+  animation: legClimb 0.32s ease-in-out infinite alternate-reverse;
+}
+.runner--climb .rb-arm-l {
+  animation: armClimb 0.32s ease-in-out infinite alternate-reverse;
+}
+.runner--climb .rb-arm-r {
+  animation: armClimb 0.32s ease-in-out infinite alternate;
+}
+.runner--climb .rb-beacon {
+  animation: beaconPulse 0.28s steps(1) infinite;
+}
+.runner--climb .rb-chest {
+  animation: chestPulse 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes legClimb {
+  from { transform: rotate(-14deg); }
+  to { transform: rotate(14deg); }
+}
+@keyframes armClimb {
+  from { transform: rotate(-20deg); }
+  to { transform: rotate(20deg); }
+}
+@keyframes beaconPulse {
+  0%, 100% { fill: #FDE047; filter: drop-shadow(0 0 4px #FDE047); }
+  50% { fill: #94A3B8; filter: none; }
+}
+@keyframes chestPulse {
+  from { fill: #38BDF8; filter: drop-shadow(0 0 3px #38BDF8); }
+  to { fill: #066AAD; filter: none; }
+}
+
+/* Pose: BREAKER (Roof Header Task) */
+.runner--breaker .rb-arm-r {
+  transform: rotate(-75deg);
+  transition: transform 0.2s ease-out;
+}
+.runner--breaker .rb-beacon {
+  fill: #FDE047;
+  filter: drop-shadow(0 0 4px #FDE047);
+}
+
+/* Pose: REPAIR (Floor 07 Short Circuit Repair) */
+.runner--repair .rb-tool {
+  display: block;
+}
+.runner--repair .rb-spark {
+  display: block;
+  animation: sparkBurst 0.1s infinite;
+}
+.runner--repair .rb-arm-r {
+  animation: weldAction 0.14s ease-in-out infinite alternate;
+}
+.runner--repair .rb-eye {
+  fill: #FDE047;
+  filter: drop-shadow(0 0 4px #FDE047);
+}
+.runner--repair .rb-beacon {
+  animation: beaconPulse 0.15s steps(1) infinite;
+}
+
+@keyframes weldAction {
+  from { transform: rotate(-35deg); }
+  to { transform: rotate(-50deg); }
+}
+@keyframes sparkBurst {
+  0%, 100% { opacity: 1; transform: scale(1.1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* Pose: CONNECT (Floors 06 - 01 Branch Connections) */
+.runner--connect .rb-tool {
+  display: block;
+}
+.runner--connect .rb-arm-r {
+  animation: connectWrench 0.22s ease-in-out infinite alternate;
+}
+.runner--connect .rb-eye {
+  fill: #38BDF8;
+  filter: drop-shadow(0 0 3px #38BDF8);
+}
+
+@keyframes connectWrench {
+  from { transform: rotate(-25deg); }
+  to { transform: rotate(-45deg); }
+}
+
+/* Pose: DONE (Ground Floor Mission Complete) */
+.runner--done .rb-arm-r {
+  transform: rotate(-45deg);
+}
+.runner--done .rb-eye {
+  fill: #10B981;
+  filter: drop-shadow(0 0 3px #10B981);
+}
+.runner--done .rb-chest {
+  fill: #10B981;
+  filter: drop-shadow(0 0 3px #10B981);
+}
+
+/* ==========================================================================
+   FLOOR 07: HAZARD SHORT CIRCUIT VS CLEARED STATE
+   ========================================================================== */
+.hazard-plate-box {
+  transition: all 0.3s ease;
+}
+
+.floor[data-floor="warning"][data-power="fault"] .hazard-plate-box {
+  border-color: #EF4444 !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.45) !important;
+  animation: hazardJitter 0.12s infinite;
+}
+
+@keyframes hazardJitter {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 1px); }
+  75% { transform: translate(1px, -1px); }
+}
+
+.floor[data-floor="warning"][data-power="lit"] .hazard-plate-box {
+  border-color: #10B981 !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* ==========================================================================
+   FLOOR 06: BACKSTOP SEQUENTIAL ILLUMINATION
+   ========================================================================== */
+.backstop-box {
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.floor[data-floor="backstop"][data-power="lit"] .backstop-box {
+  border-color: #066AAD !important;
+  box-shadow: 0 0 24px rgba(6, 106, 173, 0.28) !important;
+}
+
+.backstop-step {
+  transition: all 0.35s ease;
+}
+
+/* When dead, steps are resting */
+.floor[data-floor="backstop"][data-power="dead"] .backstop-step {
+  opacity: 0.9;
+}
+
+/* When lit, steps sequentially light up */
+.floor[data-floor="backstop"][data-power="lit"] .backstop-step-1 {
+  animation: stepIgnite 0.4s ease-out 0.05s forwards;
+}
+.floor[data-floor="backstop"][data-power="lit"] .backstop-step-2 {
+  animation: stepIgnite 0.4s ease-out 0.22s forwards;
+}
+.floor[data-floor="backstop"][data-power="lit"] .backstop-step-3 {
+  animation: stepIgnite 0.4s ease-out 0.38s forwards;
+}
+
+@keyframes stepIgnite {
+  0% { transform: scale(0.98); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   GROUND FLOOR FINALE: SHOP FRONT ELEVATION
+   ========================================================================== */
+.shop {
+  width: 320px;
+  max-width: 100%;
+  margin: 1rem 0 2.5rem 0;
+  padding: 0;
+}
+
+.shop svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.shop-caption {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #717680;
+  text-transform: uppercase;
+}
+
+/* Dead State */
+.shop .shop-cone {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+.shop .shop-lamp {
+  fill: #475569;
+  transition: fill 0.3s ease;
+}
+.shop .shop-sign {
+  fill: #475569;
+  transition: fill 0.3s ease;
+}
+.shop .shop-window {
+  fill: #334155;
+  transition: fill 0.3s ease;
+}
+.shop .shop-open {
+  fill: #1E293B;
+  transition: fill 0.3s ease;
+}
+.shop .shop-panel-lamp {
+  fill: #475569;
+  transition: fill 0.3s ease;
+}
+.shop .shop-feed {
+  stroke: #475569;
+  transition: stroke 0.3s ease;
+}
+
+/* Lit State (Powered by the Runner) */
+.shop--lit .shop-cone {
+  opacity: 0.4;
+}
+.shop--lit .shop-lamp {
+  fill: #FDE047;
+  filter: drop-shadow(0 0 6px #FDE047);
+}
+.shop--lit .shop-sign {
+  fill: #38BDF8;
+  filter: drop-shadow(0 0 8px #38BDF8);
+  animation: neonHum 3.5s ease-in-out infinite;
+}
+.shop--lit .shop-window {
+  fill: #FEF08A;
+  filter: drop-shadow(0 0 5px rgba(254, 240, 138, 0.45));
+}
+.shop--lit .shop-open {
+  fill: #EF4444;
+  filter: drop-shadow(0 0 5px #EF4444);
+}
+.shop--lit .shop-panel-lamp {
+  fill: #10B981;
+  filter: drop-shadow(0 0 4px #10B981);
+}
+.shop--lit .shop-feed {
+  stroke: #38BDF8;
+  filter: drop-shadow(0 0 5px #38BDF8);
+}
+.shop--lit .shop-caption {
+  color: #066AAD;
+}
+
+@keyframes neonHum {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.88; }
+}
+
+/* Hard Step-End Terminal Cursor Blink (Authentic On/Off, No Fade) */
+@keyframes terminalBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.terminal-cursor {
+  animation: terminalBlink 0.85s step-end infinite;
+}
+
+/* ==========================================================================
+   FLOOR 01 / SECTION 05: IN-PERSON SETUP (BARBER-POLE & JOLTED CTA)
+   ========================================================================== */
+@keyframes cautionBarberPole {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 33.94px 0;
+  }
+}
+
+.caution-ribbon-active {
+  animation: cautionBarberPole 1.2s linear infinite;
+}
+
+@keyframes ctaJolt {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.025) translateX(-4px);
+  }
+  30% {
+    transform: scale(1.025) translateX(4px);
+  }
+  45% {
+    transform: scale(1.01) translateX(-2px);
+  }
+  60% {
+    transform: scale(1.005) translateX(2px);
+  }
+  75% {
+    transform: scale(1) translateX(-1px);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+  }
+}
+
+.cta-jolt {
+  animation: ctaJolt 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* ==========================================================================
+   FLOOR 04: ANALOG PANEL FLIP (CARRIER NETWORK SWITCH)
+   ========================================================================== */
+@keyframes analogPanelFlip {
+  0% {
+    transform: perspective(600px) rotateX(-16deg);
+    opacity: 0.55;
+  }
+  65% {
+    transform: perspective(600px) rotateX(3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: perspective(600px) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+.analog-panel-flip {
+  animation: analogPanelFlip 0.28s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY: PREFERS REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
