@@ -129,7 +129,7 @@ export default function CarrierSwitcher() {
 
                   <div className="mt-3 pt-2.5 border-t border-[#4A5568]/60 flex items-center justify-between text-[11px] font-mono text-[#A0AEC0]">
                     <span>Turn dial or click to switch</span>
-                    <span className="text-[#38BDF8] font-bold group-hover:translate-x-0.5 transition-transform">
+                    <span className="text-[#F76115] font-bold group-hover:translate-x-0.5 transition-transform">
                       SWITCH TO GSM ➔
                     </span>
                   </div>
@@ -161,7 +161,7 @@ export default function CarrierSwitcher() {
 
                   <div className="mt-3 pt-2.5 border-t border-[#4A5568]/60 flex items-center justify-between text-[11px] font-mono text-[#A0AEC0]">
                     <span>Turn dial or click to switch</span>
-                    <span className="text-[#F76115] font-bold group-hover:translate-x-0.5 transition-transform">
+                    <span className="text-[#38BDF8] font-bold group-hover:translate-x-0.5 transition-transform">
                       SWITCH TO CDMA ➔
                     </span>
                   </div>

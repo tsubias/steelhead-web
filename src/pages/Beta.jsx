@@ -14,7 +14,7 @@ import ShopFront from "../components/beta/riser/ShopFront";
 
 export default function Beta() {
   useEffect(() => {
-    document.title = "Beta Field Specification // Steelhead AI";
+    document.title = "Steelhead AI";
 
     // Prevent search engine crawlers from indexing this private/invite-only beta page
     let metaRobots = document.querySelector('meta[name="robots"]');

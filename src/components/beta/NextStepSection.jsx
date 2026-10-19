@@ -169,14 +169,14 @@ export default function NextStepSection() {
             <span>✉</span> Contact Thomas for Setup
           </a>
           <a
-            href="tel:5415550123"
+            href="mailto:support@steelhead.ai?subject=Steelhead%20Demo%20Request"
             className={`py-3.5 px-6 rounded-xl font-mono text-sm font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer border-2 ${
               isCharged
                 ? "bg-[#066AAD] hover:bg-[#004D7D] text-white border-[#066AAD] shadow-md shadow-[#066AAD]/25"
                 : "bg-white hover:bg-[#F0F7FD] text-[#066AAD] border-[#066AAD]/70 shadow-sm"
             }`}
           >
-            <span>📞</span> Call Direct
+            <span>✉</span> Request Demo
           </a>
         </div>
       </div>

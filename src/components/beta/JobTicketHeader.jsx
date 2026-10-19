@@ -75,16 +75,12 @@ export default function JobTicketHeader() {
         </div>
 
         {/* Industrial Ticket Header Badge */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E6DBC2]">
+        <div className="flex items-center pb-4 border-b border-[#E6DBC2]">
           <div className="inline-flex items-center gap-2 bg-[#FFF3ED] border-2 border-[#F76115] text-[#F76115] px-3 py-1.5 rounded-md text-xs sm:text-sm font-mono font-bold tracking-wider uppercase leading-snug shadow-sm">
             <span className={`w-2 h-2 rounded-full shrink-0 transition-all duration-300 ${
               activeStage >= 1 ? "bg-[#F76115] shadow-[0_0_8px_#F76115]" : "bg-slate-400/50"
             }`} />
             <span>FIELD TEST // CLOSED BETA</span>
-          </div>
-
-          <div className="text-[11px] font-mono text-[#535862] uppercase tracking-wider flex items-center gap-2">
-            <span className="text-[#066AAD] font-bold">REV 1.4</span>
           </div>
         </div>
 
