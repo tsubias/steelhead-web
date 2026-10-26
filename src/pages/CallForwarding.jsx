@@ -45,6 +45,7 @@ export default function CallForwarding() {
   const [actionType, setActionType] = useState("on");
 
   const [copiedKey, setCopiedKey] = useState(null);
+  const [showTroubleshooting, setShowTroubleshooting] = useState(false);
   const [showUsMobileHelper, setShowUsMobileHelper] = useState(false);
   const [confirmedSetup, setConfirmedSetup] = useState(false);
 
@@ -331,6 +332,46 @@ export default function CallForwarding() {
                 )}
               </div>
 
+              {/* Collapsible Troubleshooting Helper */}
+              <div className="pt-0.5">
+                <button
+                  type="button"
+                  onClick={() => setShowTroubleshooting(!showTroubleshooting)}
+                  className="w-full text-left text-[11px] font-mono text-[#066AAD] font-bold flex items-center justify-between py-1 cursor-pointer"
+                >
+                  <span>ℹ Troubleshooting</span>
+                  <span>{showTroubleshooting ? "▲" : "▼"}</span>
+                </button>
+                {showTroubleshooting && (
+                  <div className="mt-2 p-3 bg-[#F1F5F9] border border-[#CBD5E1] rounded-lg text-xs text-[#334155] space-y-3">
+                    <div>
+                      <p className="font-bold text-[#0F172A]">
+                        Security warning when trying to dial
+                      </p>
+                      <p className="text-[11px] text-[#475569] mt-0.5 leading-relaxed">
+                        Apple prevents auto-dialing for security reasons. Fix: tap "Copy Code," open your phone's dialer, paste the code, and hit Dial.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-bold text-[#0F172A]">
+                        Call forward succeeds, but voicemail still picks up
+                      </p>
+                      <p className="text-[11px] text-[#475569] mt-0.5 leading-relaxed">
+                        Your phone's operating system is likely answering the call locally before the carrier network can trigger the forward to Steelhead.
+                      </p>
+                      <ul className="list-disc pl-4 mt-1.5 space-y-1.5 text-[11px] text-[#475569]">
+                        <li>
+                          <strong className="text-[#0F172A]">Apple iPhone (Live Voicemail):</strong> Go to your iPhone Settings &gt; Phone &gt; Live Voicemail, and toggle it off.
+                        </li>
+                        <li>
+                          <strong className="text-[#0F172A]">Google Pixel (Call Screen):</strong> Open the Phone app &gt; Settings &gt; Call Screen. Turn off "Automatically screen calls" (or tap into each category and select "Ring phone"). If you see a "Take a message" option in the main Phone settings, turn that off as well.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               {/* Collapsible US Mobile Helper */}
               <div className="pt-0.5">
                 <button
@@ -338,7 +379,7 @@ export default function CallForwarding() {
                   onClick={() => setShowUsMobileHelper(!showUsMobileHelper)}
                   className="w-full text-left text-[11px] font-mono text-[#066AAD] font-bold flex items-center justify-between py-1 cursor-pointer"
                 >
-                  <span>ℹ How to tell which US Mobile network you're on</span>
+                  <span>ℹ How to identify your US Mobile network</span>
                   <span>{showUsMobileHelper ? "▲" : "▼"}</span>
                 </button>
                 {showUsMobileHelper && (
@@ -710,8 +751,55 @@ export default function CallForwarding() {
               )}
             </div>
 
-            {/* Collapsible US Mobile Helper */}
+            {/* Collapsible Troubleshooting Helper */}
             <div className="mt-4">
+              <button
+                type="button"
+                onClick={() => setShowTroubleshooting(!showTroubleshooting)}
+                className="w-full py-3 px-4 bg-[#FAF7F2] hover:bg-[#E6DBC2]/50 border-2 border-[#D6C39B] rounded-xl text-left flex items-center justify-between transition-colors cursor-pointer shadow-xs"
+              >
+                <span className="text-xs sm:text-sm font-mono font-bold text-[#101828] flex items-center gap-2">
+                  <span className="text-[#F76115] text-base">ℹ</span>
+                  Troubleshooting
+                </span>
+                <span className="text-[#066AAD] font-mono text-xs font-bold">
+                  {showTroubleshooting ? "▲ HIDE" : "▼ SHOW"}
+                </span>
+              </button>
+
+              {showTroubleshooting && (
+                <div className="mt-2.5 p-4 sm:p-5 bg-white border-2 border-[#D6C39B] rounded-xl text-xs sm:text-sm text-[#414651] space-y-4 shadow-sm">
+                  <div>
+                    <h3 className="font-bold text-[#101828] text-sm sm:text-base">
+                      Security warning when trying to dial
+                    </h3>
+                    <p className="mt-1 leading-relaxed text-[#414651]">
+                      Apple prevents auto-dialing for security reasons. Fix: tap "Copy Code," open your phone's dialer, paste the code, and hit Dial.
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#E6DBC2]">
+                    <h3 className="font-bold text-[#101828] text-sm sm:text-base">
+                      Call forward succeeds, but voicemail still picks up
+                    </h3>
+                    <p className="mt-1 leading-relaxed text-[#414651]">
+                      Your phone's operating system is likely answering the call locally before the carrier network can trigger the forward to Steelhead.
+                    </p>
+                    <ul className="mt-2.5 space-y-2 pl-4 list-disc text-[#414651] font-medium text-xs sm:text-sm">
+                      <li>
+                        <strong className="text-[#101828]">Apple iPhone (Live Voicemail):</strong> Go to your iPhone Settings &gt; Phone &gt; Live Voicemail, and toggle it off.
+                      </li>
+                      <li>
+                        <strong className="text-[#101828]">Google Pixel (Call Screen):</strong> Open the Phone app &gt; Settings &gt; Call Screen. Turn off "Automatically screen calls" (or tap into each category and select "Ring phone"). If you see a "Take a message" option in the main Phone settings, turn that off as well.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Collapsible US Mobile Helper */}
+            <div className="mt-3">
               <button
                 type="button"
                 onClick={() => setShowUsMobileHelper(!showUsMobileHelper)}
@@ -719,7 +807,7 @@ export default function CallForwarding() {
               >
                 <span className="text-xs sm:text-sm font-mono font-bold text-[#101828] flex items-center gap-2">
                   <span className="text-[#F76115] text-base">ℹ</span>
-                  How to tell which US Mobile network you're on
+                  How to identify your US Mobile network
                 </span>
                 <span className="text-[#066AAD] font-mono text-xs font-bold">
                   {showUsMobileHelper ? "▲ HIDE" : "▼ SHOW"}
