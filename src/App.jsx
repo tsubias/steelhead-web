@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
@@ -16,6 +16,9 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/call-forwarding" element={<CallForwarding />} />
+        {/* Short pointer URLs for QR code and print materials */}
+        <Route path="/go" element={<Navigate to="/beta" replace />} />
+        <Route path="/qr" element={<Navigate to="/beta" replace />} />
       </Routes>
     </BrowserRouter>
   );

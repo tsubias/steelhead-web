@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/go",
+      "destination": "/beta",
+      "permanent": false
+    },
+    {
+      "source": "/qr",
+      "destination": "/beta",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
