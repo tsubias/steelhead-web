@@ -28,26 +28,24 @@ const STEPS = [
 export default function NextStepSection() {
   const status = useFloorPower();
   const isLit = status === "lit";
-  const [litStepIndex, setLitStepIndex] = useState(-1);
-  const [isCharged, setIsCharged] = useState(false);
+  const [stepIndex, setStepIndex] = useState(-1);
+  const [charged, setCharged] = useState(false);
+  const litStepIndex = isLit ? stepIndex : -1;
+  const isCharged = isLit && charged;
 
   useEffect(() => {
-    if (!isLit) {
-      setLitStepIndex(-1);
-      setIsCharged(false);
-      return;
-    }
+    if (!isLit) return;
 
     // Sequence Choreography:
     // 1. t = 0s: Caution ribbon begins barber-pole scroll
     // 2. 2s delay after caution ribbon before step sequence starts:
-    const t0 = setTimeout(() => setLitStepIndex(0), 2000);
-    const t1 = setTimeout(() => setLitStepIndex(1), 2330);
-    const t2 = setTimeout(() => setLitStepIndex(2), 2660);
-    const t3 = setTimeout(() => setLitStepIndex(3), 2990);
+    const t0 = setTimeout(() => setStepIndex(0), 2000);
+    const t1 = setTimeout(() => setStepIndex(1), 2330);
+    const t2 = setTimeout(() => setStepIndex(2), 2660);
+    const t3 = setTimeout(() => setStepIndex(3), 2990);
 
     // 3. 1s delay after final step tile before CTA button energizes:
-    const tCta = setTimeout(() => setIsCharged(true), 4000);
+    const tCta = setTimeout(() => setCharged(true), 4000);
 
     return () => {
       clearTimeout(t0);
@@ -55,6 +53,8 @@ export default function NextStepSection() {
       clearTimeout(t2);
       clearTimeout(t3);
       clearTimeout(tCta);
+      setStepIndex(-1);
+      setCharged(false);
     };
   }, [isLit]);
 

@@ -4,27 +4,27 @@ import { useFloorPower } from "./riser/riserContext";
 export default function JobTicketHeader() {
   const floorPower = useFloorPower();
   const isLit = floorPower === "lit";
-  const [activeStage, setActiveStage] = useState(0);
+  const [stage, setStage] = useState(0);
+  const activeStage = isLit ? stage : 0;
 
   useEffect(() => {
-    if (isLit) {
-      // Stage 1: Active engages on breaker throw
-      const t1 = setTimeout(() => setActiveStage(1), 100);
-      // Stage 2: Card 1 powers up (700ms delay after Active engages)
-      const t2 = setTimeout(() => setActiveStage(2), 800);
-      // Stage 3: Card 2 powers up
-      const t3 = setTimeout(() => setActiveStage(3), 1050);
-      // Stage 4: Card 3 powers up ($0 pop)
-      const t4 = setTimeout(() => setActiveStage(4), 1300);
-      return () => {
-        clearTimeout(t1);
-        clearTimeout(t2);
-        clearTimeout(t3);
-        clearTimeout(t4);
-      };
-    } else {
-      setActiveStage(0);
-    }
+    if (!isLit) return;
+
+    // Stage 1: Active engages on breaker throw
+    const t1 = setTimeout(() => setStage(1), 100);
+    // Stage 2: Card 1 powers up (700ms delay after Active engages)
+    const t2 = setTimeout(() => setStage(2), 800);
+    // Stage 3: Card 2 powers up
+    const t3 = setTimeout(() => setStage(3), 1050);
+    // Stage 4: Card 3 powers up ($0 pop)
+    const t4 = setTimeout(() => setStage(4), 1300);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      setStage(0);
+    };
   }, [isLit]);
 
   return (

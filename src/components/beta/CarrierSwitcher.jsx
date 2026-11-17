@@ -289,7 +289,7 @@ export default function CarrierSwitcher() {
                       Dial code:
                     </div>
                     <div className="bg-black border border-zinc-700/80 rounded-lg p-2.5 sm:p-3 font-mono text-sm sm:text-lg font-black tracking-wider mb-2 flex items-center gap-1 sm:gap-1.5 select-all">
-                      <span className="text-emerald-400 font-black">**61*</span>
+                      <span className="text-emerald-400 font-black">**004*1</span>
                       <span className="text-zinc-500 font-semibold text-[10px] sm:text-sm tracking-normal whitespace-nowrap">
                         [YOUR STEELHEAD NUMBER]
                       </span>
@@ -315,7 +315,7 @@ export default function CarrierSwitcher() {
                       Dial code:
                     </div>
                     <div className="bg-black border border-zinc-700/80 rounded-lg p-2.5 sm:p-3 font-mono text-sm sm:text-lg font-black text-zinc-200 tracking-wider mb-2 flex items-center select-all">
-                      <span>##61#</span>
+                      <span>##004#</span>
                     </div>
                   </div>
 

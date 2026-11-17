@@ -6,29 +6,30 @@ const TERMINAL_TEXT = "Helping with missed calls is only the start. Seriously, a
 export default function WhoBuiltThisSection() {
   const status = useFloorPower();
   const isLit = status === "lit";
-  const [typedCount, setTypedCount] = useState(0);
+  const [count, setCount] = useState(0);
+  const typedCount = isLit ? count : 0;
 
   useEffect(() => {
-    if (!isLit) {
-      setTypedCount(0);
-      return;
-    }
+    if (!isLit) return;
 
     // 8s reading/scanning delay (calculated from ~144 words in this section at half-scanning pace)
+    let interval;
     const timeout = setTimeout(() => {
       let current = 0;
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         current += 1;
-        setTypedCount(current);
+        setCount(current);
         if (current >= TERMINAL_TEXT.length) {
           clearInterval(interval);
         }
       }, 45); // ~3.5s total typing duration (twice previous speed)
-
-      return () => clearInterval(interval);
     }, 8000);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+      setCount(0);
+    };
   }, [isLit]);
 
   return (

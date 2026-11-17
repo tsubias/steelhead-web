@@ -19,7 +19,7 @@ const prefersReducedMotion = () =>
  * each floor in order once that floor scrolls into view. Work stays done when scrolling back up.
  */
 export default function PowerRiser({ children }) {
-  const reduced = useMemo(prefersReducedMotion, []);
+  const reduced = useMemo(() => prefersReducedMotion(), []);
   const [power, setPower] = useState(() =>
     reduced ? Object.fromEntries(FLOORS.map((f) => [f.id, "lit"])) : {}
   );

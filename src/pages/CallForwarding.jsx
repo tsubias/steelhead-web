@@ -54,12 +54,13 @@ export default function CallForwarding() {
     document.title = "Steelhead AI";
   }, []);
 
-  // Sync if query param changes
-  useEffect(() => {
+  const [prevQueryPhone, setPrevQueryPhone] = useState(queryPhone);
+  if (queryPhone !== prevQueryPhone) {
+    setPrevQueryPhone(queryPhone);
     if (queryPhone) {
       setRawPhone(cleanDigits(queryPhone));
     }
-  }, [queryPhone]);
+  }
 
   const formattedPhone = formatPhoneNumber(rawPhone);
   const hasPhone = rawPhone.length >= 10;
@@ -85,11 +86,11 @@ export default function CallForwarding() {
       networkName: "AT&T / T-Mobile Network",
       networkType: "GSM / LIGHTSPEED",
       carriers: "AT&T, T-Mobile, Cricket, Mint, Google Fi, US Mobile Lightspeed",
-      turnOnCode: hasPhone ? `**61*${rawPhone}#` : `**61*${phonePlaceholder}#`,
-      turnOnDial: hasPhone ? `tel:**61*${rawPhone}%23` : null,
-      turnOffCode: "##61#",
-      turnOffDial: "tel:%23%2361%23",
-      notes: "Forward when unanswered (default ~20 sec ring).",
+      turnOnCode: hasPhone ? `**004*1${rawPhone.length === 11 && rawPhone.startsWith("1") ? rawPhone.slice(1) : rawPhone.slice(0, 10)}#` : `**004*1${phonePlaceholder}#`,
+      turnOnDial: hasPhone ? `tel:**004*1${rawPhone.length === 11 && rawPhone.startsWith("1") ? rawPhone.slice(1) : rawPhone.slice(0, 10)}%23` : null,
+      turnOffCode: "##004#",
+      turnOffDial: "tel:%23%23004%23",
+      notes: "Conditional call forwarding (no answer / busy / unreachable).",
     };
   }, [carrier, hasPhone, rawPhone]);
 
@@ -392,7 +393,7 @@ export default function CallForwarding() {
                         <strong>Warp:</strong> Verizon network (Dial <code>*71</code>)
                       </li>
                       <li>
-                        <strong>Light Speed:</strong> T-Mobile/GSM network (Dial <code>**61*</code>)
+                        <strong>Light Speed:</strong> T-Mobile/GSM network (Dial <code>**004*</code>)
                       </li>
                       <li>
                         SIM color: Black = Verizon, White = T-Mobile.
